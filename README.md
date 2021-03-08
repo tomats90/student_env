@@ -57,19 +57,16 @@ Once the command has completed start up the environment:
 4. Open http://localhost:3001/ to get VS Code using your favorite browser.
 
 5. Open http://localhost:3003/ to get webviz using your favorite browser.
+6. Open http://localhost:3000/ to get x11 vnc server using your favorite browser.
 
-6. To playback your bagfile from your shared folder:
+6. To start turtlesim simulation:
     - in VS Code open terminal and write: 
     ```shell
-    $ rosrun rosbridge_server rosbridge_websocket 
+    $ rosrun turtlesim turtlesim_node 
     ```    
+    - now one should see the turtlesim in x11 vnc server http://localhost:3000/
     - in VS Code open 2nd terminal and write: 
     ```shell
-    $ rosrun rosapi rosapi_node
+    $ rosrun turtlesim turtle_teleop_key
     ```   
-    - in VS Code open 3rd terminal, navigate to bagfile path and play bagfile: 
-    ```shell
-    $ cd ..
-    $ cd bagfiles
-    $ rosbag play YourBagFile.bag
-    ```    
+    - now one should be able to move the turtle with keyboard arrows
