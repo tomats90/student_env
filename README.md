@@ -27,9 +27,9 @@ $ sudo apt-get install docker docker-compose
 3. On Windows one needs to install Docker desktop https://docs.docker.com/docker-for-windows/install/
     * Docker uses feature cgrous from linux Kernel, so installing Docker desktop, it virtualises a Linux Kernel. To virtualise in Windows, one hast to conduct the  following steps:
     * check if the parameters in the following link apply: https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization
-    * most important is in task manager:![image](https://user-images.githubusercontent.com/48677890/110318061-4d9d0b80-800d-11eb-8793-b4c5af963cef.png)
+    * most important is in task manager: <img src="https://user-images.githubusercontent.com/48677890/110318061-4d9d0b80-800d-11eb-8793-b4c5af963cef.png" width="500" height="500">
     * if the virtualisation is deactivated, then it needs to be enables in BIOS
-    * check in google how to enable for your hardware. Here is an example for ASUS (used the manual from https://www.asus.com/support/FAQ/1038245/) ![image](https://user-images.githubusercontent.com/48677890/110318487-d451e880-800d-11eb-9fdb-dddb2757917c.png)
+    * check in google how to enable for your hardware. Here is an example for ASUS (used the manual from https://www.asus.com/support/FAQ/1038245/) <img src="https://user-images.githubusercontent.com/48677890/110318487-d451e880-800d-11eb-9fdb-dddb2757917c.png" width="500" height="500">
 
 
 
