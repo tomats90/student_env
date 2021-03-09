@@ -20,6 +20,7 @@ Before you start you have to have docker and docker-compose installed on your ma
 
 1. Ubuntu:
 ```shell
+$ sudo apt-get update
 $ sudo apt-get install docker docker-compose
 ```
 
@@ -44,20 +45,18 @@ We recommend using Theia WebIDE since it has complete VSCode function support af
 $ git clone https://gitlab.switch.ch/digital_engineering/ros_env_vscode_webviz.git
 ```
 
-2. In the file "docker-compose.yml" line 44, set your local shared folder. Before the next step put there a bagfile.
-
-3. Enter the following command under the folder of the cloned project:
+2. Enter the following command under the folder of the cloned project:
 ```shell
 $ cd ros_env_vscode_webviz
-$ docker-compose up
+$ sudo docker-compose up
 ```
 If you run this command for the first time, it will download lots of data and run for a long time => take a coffee :)
 Once the command has completed start up the environment:
 
-4. Open http://localhost:3001/ to get VS Code using your favorite browser.
+3. Open http://localhost:3001/ to get VS Code using your favorite browser.
 
-5. Open http://localhost:3003/ to get webviz using your favorite browser.
-6. Open http://localhost:3000/ to get x11 vnc server using your favorite browser.
+4. Open http://localhost:3003/ to get webviz using your favorite browser.
+5. Open http://localhost:3000/ to get x11 vnc server using your favorite browser.
 
 6. To start turtlesim simulation:
     - in VS Code open terminal and write: 
