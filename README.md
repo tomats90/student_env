@@ -42,7 +42,7 @@ We recommend using Theia WebIDE since it has complete VSCode function support af
 
 1. Clone this repository:
 ```shell
-$ git clone https://gitlab.switch.ch/digital_engineering/ros_env_vscode_webviz.git
+$ git clone https://github.com/LagzdinsHSLU/ros_env_vscode_webviz.git
 ```
 
 2. Enter the following command under the folder of the cloned project:
