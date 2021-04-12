@@ -31,7 +31,7 @@ services:
     # env_file:
     #   - .env
     #build: .
-    image: lagzdins/ros-web-dev:tagname
+    image: lagzdins/ros-web-dev:ost_sdk
     ipc: host
     security_opt:
     - seccomp:unconfined
