@@ -148,6 +148,25 @@ RUN jupyter nbextension enable hinterland/hinterland && \
     jupyter nbextension enable code_prettify/autopep8 && \
     jupyter nbextension enable nbTranslate/main
 
+
+# fix locale error
+RUN sudo apt-get update
+RUN sudo apt-get install -y locales
+RUN sudo locale-gen en_US.UTF-8 && \ 
+    sudo update-locale LANG=en_US.UTF-8
+
+## install perl and env. check if they exist
+RUN sudo apt-get install -y perl
+RUN sudo apt-get install -y environment-modules
+RUN ls /usr/bin/ | grep perl
+RUN ls /usr/bin/ | grep env
+
+
+# install OST SDK
+RUN curl -L https://wiki.bu.ost.ch/infoportal/_media/software/linux/images/ost-ros-dev-image-bblue-2021.03.24-sdk.tar.xz --output ost-ros-dev-image-bblue-2021.03.24-sdk.tar.xz 
+RUN tar -vxJf ./ost-ros-dev-image-bblue-2021.03.24-sdk.tar.xz
+RUN sudo /bin/bash ./ost-distro-glibc-x86_64-ost-ros-image-melodic-cortexa8hf-neon-bblue-toolchain-1.0.sh
+
 # enter ROS world
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 
