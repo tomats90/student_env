@@ -22,23 +22,17 @@ services:
     - xserver
     depends_on:
     - xserver
-  ## ML - added webviz
-  web:
-    image: johannhaselberger/webviz
-    ports:
-    - "3003:8080" # webviz
   workspace:
     # env_file:
     #   - .env
     #build: .
-    image: lagzdins/ros-web-dev:tagname
+    image: lagzdins/ros-web-dev:student_env
     ipc: host
     security_opt:
     - seccomp:unconfined
     ports:
     - "3001:3000" # jupyter
-    - "3002:8888" # vscode
-    - "9090:9090" # rosbridge 
+    - "8080:8080" # vscode
     volumes:
     ## ML: this is where you put your path to bagfiles - shared folder
     #- /home/lagzdins/bagfiles/test_docker:/bagfiles
@@ -46,7 +40,7 @@ services:
     - ~/.gitconfig:/home/developer/.gitconfig
     environment:
     - DISPLAY=:0
-    - ROS_MASTER_URI=http://simulator:11311/
+    - PASSWORD=password
     volumes_from:
     - xserver
     - simulator

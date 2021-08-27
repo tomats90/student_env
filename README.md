@@ -1,18 +1,12 @@
-# ros_env_vscode_webviz
+# Student Environment
 ----------------------------
 
-Origin:
-- https://github.com/devrt/ros-devcontainer-vscode
-- https://github.com/cruise-automation/webviz
-
 Packed with:
-- Pre-configured docker image for ROS development.
-- Browser accessible X11 server to display gazebo, rviz, rqt (runs on Windows/Mac).
-- Tasks definition to run catkin_make, roscore, rviz commands.
-- Preconfigured code completion for C++, Python, XML (package.xml, launchfiles, URDF, SDF).
-- Preconfigured simulation environments (Flatland, TurtleBot3, ARIAC, Virtual RobotX, UUV).
-- Bonus: WebIDE (Theia) with preconfigured C++, Python, XML completion.
-- Webviz
+- Browser accessible X11 server to display stuff.
+- VS Code WebIDE
+- packages
+    - gcc, cmake
+    - python, pip
 
 Requirements
 -------------------------------------
@@ -35,37 +29,32 @@ $ sudo apt-get install docker docker-compose
 
 
 
-How to use the WebIDE 
+How to use the student environment 
 -------------------------------------
-As of writing, docker-compose support of VSCode is not perfectly stable on all the platforms.
-We recommend using Theia WebIDE since it has complete VSCode function support after 1.0 release.
 
 1. Clone this repository:
 ```shell
-$ git clone https://github.com/LagzdinsHSLU/ros_env_vscode_webviz.git
+$ git clone https://github.com/tomats90/student_env.git
 ```
 
 2. Enter the following command under the folder of the cloned project:
-```shell
-$ cd ros_env_vscode_webviz
-$ sudo docker-compose up
-```
+
+    Linux
+    ```shell
+    $ cd student_env
+    $ sudo docker-compose up
+    ```
+
+    Windows powershell
+
+    ```powershell
+    $ cd student_env
+    $ sudo docker-compose up
+    ```
+
 If you run this command for the first time, it will download lots of data and run for a long time => take a coffee :)
 Once the command has completed start up the environment:
 
-3. Open http://localhost:3001/ to get VS Code using your favorite browser.
+3. X11 VNC server http://localhost:3000/
 
-4. Open http://localhost:3003/ to get webviz using your favorite browser.
-5. Open http://localhost:3000/ to get x11 vnc server using your favorite browser.
-
-6. To start turtlesim simulation:
-    - in VS Code open terminal and write: 
-    ```shell
-    $ rosrun turtlesim turtlesim_node 
-    ```    
-    - now one should see the turtlesim in x11 vnc server http://localhost:3000/
-    - in VS Code open 2nd terminal and write: 
-    ```shell
-    $ rosrun turtlesim turtle_teleop_key
-    ```   
-    - now one should be able to move the turtle with keyboard arrows
+4. VS Code http://localhost:8080/ (password: password)

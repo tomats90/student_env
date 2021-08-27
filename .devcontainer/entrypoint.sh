@@ -1,23 +1,61 @@
-#!/bin/bash -e
+#!/bin/sh
+set -eu
 
-USER_ID=$(id -u)
-GROUP_ID=$(id -g)
+export PS1='\w $ '
 
-sudo usermod -u $USER_ID -o -m -d /home/developer developer > /dev/null 2>&1
-sudo groupmod -g $GROUP_ID developer > /dev/null 2>&1
-sudo chown -R developer:developer /workspace
+EXTENSIONS="${EXTENSIONS:-none}"
+LAB_REPO="${LAB_REPO:-none}"
 
-ln -sfn /home/developer/.vscode /workspace/.vscode
+eval "$(fixuid -q)"
 
-rm -f /workspace/compile_flags.txt || true
-sed -e 's@\$ROS_DISTRO@'"$ROS_DISTRO"'@' /home/developer/compile_flags.txt > /workspace/compile_flags.txt
+mkdir -p /home/coder/workspace
+mkdir -p /home/coder/.local/share/code-server/User
+cat > /home/coder/.local/share/code-server/User/settings.json << EOF
+{
+    "workbench.colorTheme": "Visual Studio Dark"
+}
+EOF
+chown coder /home/coder/workspace
+chown -R coder /home/coder/.local
 
-ln -sfn /workspace /home/developer/workspace
+if [ "${DOCKER_USER-}" ]; then
+  echo "$DOCKER_USER ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/nopasswd > /dev/null
+  sudo usermod --login "$DOCKER_USER" coder
+  sudo groupmod -n "$DOCKER_USER" coder
+  USER="$DOCKER_USER"
+  sudo sed -i "/coder/d" /etc/sudoers.d/nopasswd
+fi
 
-source /opt/ros/$ROS_DISTRO/setup.bash
+if [ ${EXTENSIONS} != "none" ]
+    then
+      echo "Installing Extensions"
+      for extension in $(echo ${EXTENSIONS} | tr "," "\n")
+        do
+          if [ "${extension}" != "" ]
+            then
+              dumb-init /usr/bin/code-server \
+                --install-extension "${extension}" \
+                /home/coder
+	  fi
+        done
+fi
 
-mkdir -p /workspace/src && cd /workspace/src && catkin_init_workspace || true
+if [ ${LAB_REPO} != "none" ]
+  then
+    cd workspace
+    git clone ${LAB_REPO}
+    cd ..
+fi
 
-cd /home/developer
-
-exec $@
+if [ ${HTTPS_ENABLED} = "true" ]
+  then
+    dumb-init /usr/bin/code-server \
+      --bind-addr "${APP_BIND_HOST}":"${APP_PORT}" \
+      --cert /home/coder/.certs/cert.pem \
+      --cert-key /home/coder/.certs/key.pem \
+      /home/coder/workspace
+else
+    dumb-init /usr/bin/code-server \
+      --bind-addr "${APP_BIND_HOST}":"${APP_PORT}" \
+      /home/coder/workspace
+fi
