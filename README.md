@@ -49,7 +49,7 @@ $ git clone https://github.com/tomats90/student_env.git
 
     ```powershell
     $ cd student_env
-    $ sudo docker-compose up
+    $ docker-compose up
     ```
 
 If you run this command for the first time, it will download lots of data and run for a long time => take a coffee :)
